@@ -9,8 +9,17 @@
 
 <body>
 
+<!-- 🔐 AUTH PROTECTION -->
+<script>
+    if (localStorage.getItem("isLoggedIn") !== "true") {
+        window.location.replace("index.html");
+    }
+</script>
+
+<!-- HEADER -->
 <header id="header">
     <div class="logo">NETFLIX</div>
+
     <nav>
         <a href="#">Home</a>
         <a href="#">TV Shows</a>
@@ -19,21 +28,25 @@
         <a href="#">My List</a>
         <a href="#">Browse by Languages</a>
     </nav>
+
+    <!-- PROFILE DROPDOWN -->
+    <div class="profile-container">
+        <div class="profile-icon">👤</div>
+        <div class="profile-dropdown">
+            <p id="userName">User</p>
+            <hr>
+            <button onclick="logout()">Logout</button>
+        </div>
+    </div>
 </header>
 
-<div class="hero" 
-     style="
-        background: 
-        linear-gradient(
-            to bottom,
-            rgba(0,0,0,0.4),
-            rgba(20,20,20,1)
-        ),
+<!-- HERO -->
+<section class="hero"
+    style="background:
+        linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(20,20,20,1)),
         url('stranger-things.jpeg');
         background-size: cover;
-        background-position: center;
-     ">
-     
+        background-position: center;">
     <div class="hero-content">
         <h1>Stranger Things</h1>
         <p>
@@ -45,100 +58,22 @@
             <button class="btn btn-info">ⓘ More Info</button>
         </div>
     </div>
-</div>
+</section>
 
-<div class="movie-row">
+<!-- MOVIE ROW -->
+<section class="movie-row">
     <h2 class="row-title">Trending Now</h2>
     <div class="row-posters">
-
-        <div class="movie-poster">
-            <img src="dark.jpeg" alt="Dark" class="poster-img">
-        </div>
-
-        <div class="movie-poster">
-            <img src="breaking-bad.jpeg" alt="Breaking Bad" class="poster-img">
-        </div>
-
-        <div class="movie-poster">
-            <img src="money-hiest.jpeg" alt="Money Heist" class="poster-img">
-        </div>
-
-        <div class="movie-poster">
-            <img src="narcos.jpeg" alt="Narcos" class="poster-img">
-        </div>
-
-        <div class="movie-poster">
-            <img src="crown.jpeg" alt="The Crown" class="poster-img">
-        </div>
-
-        <div class="movie-poster">
-            <img src="bridegerton.jpeg" alt="Bridgerton" class="poster-img">
-        </div>
-
+        <img src="dark.jpeg" class="poster-img">
+        <img src="breaking-bad.jpeg" class="poster-img">
+        <img src="money-hiest.jpeg" class="poster-img">
+        <img src="narcos.jpeg" class="poster-img">
+        <img src="crown.jpeg" class="poster-img">
+        <img src="bridegerton.jpeg" class="poster-img">
     </div>
-</div>
+</section>
 
-
-<div class="movie-row large-row">
-    <h2 class="row-title">Netflix Originals</h2>
-    <div class="row-posters">
-
-        <div class="movie-poster">
-            <img src="black-mirror.jpeg" alt="Black Mirror" class="poster-img">
-        </div>
-
-        <div class="movie-poster">
-            <img src="extraction.jpeg" alt="Extraction" class="poster-img">
-        </div>
-
-        <div class="movie-poster">
-            <img src="gray-man.jpeg" alt="The Gray Man" class="poster-img">
-        </div>
-
-        <div class="movie-poster">
-            <img src="old-guard.jpeg" alt="The Old Guard" class="poster-img">
-        </div>
-
-    </div>
-</div>
-
-
-<div class="movie-row">
-    <h2 class="row-title">Action Movies</h2>
-    <div class="row-posters">
-
-        <div class="movie-poster">
-            <img src="6-underground.jpeg" alt="6 Underground" class="poster-img">
-        </div>
-
-        <div class="movie-poster">
-            <img src="extraction.jpeg" alt="Extraction" class="poster-img">
-        </div>
-
-        <div class="movie-poster">
-            <img src="gray-man.jpeg" alt="The Gray Man" class="poster-img">
-        </div>
-
-    </div>
-</div>
-
-
-<div class="movie-row">
-    <h2 class="row-title">Comedies</h2>
-    <div class="row-posters">
-
-        <div class="movie-poster">
-            <img src="murder-mystery.jpeg" alt="Murder Mystery" class="poster-img">
-        </div>
-
-        <div class="movie-poster">
-            <img src="kissing-booth.jpeg" alt="The Kissing Booth" class="poster-img">
-        </div>
-
-    </div>
-</div>
-
-<!-- FAQ SECTION -->
+<!-- FAQ -->
 <section class="faq-section">
     <h1 class="faq-title">Frequently Asked Questions</h1>
 
@@ -148,7 +83,7 @@
             <span class="icon">+</span>
         </button>
         <div class="faq-answer">
-            Netflix is a streaming service that offers a wide variety of award-winning TV shows, movies, anime, documentaries, and more.
+            Netflix is a streaming service offering movies, TV shows, documentaries, and more.
         </div>
     </div>
 
@@ -158,59 +93,42 @@
             <span class="icon">+</span>
         </button>
         <div class="faq-answer">
-            Watch Netflix on your smartphone, tablet, Smart TV, laptop, or streaming device, all for one fixed monthly fee.
-        </div>
-    </div>
-
-    <div class="faq-item">
-        <button class="faq-question">
-            Where can I watch?
-            <span class="icon">+</span>
-        </button>
-        <div class="faq-answer">
-            Watch anywhere, anytime. Sign in with your Netflix account to watch instantly on the web or on devices.
-        </div>
-    </div>
-
-    <div class="faq-item">
-        <button class="faq-question">
-            How do I cancel?
-            <span class="icon">+</span>
-        </button>
-        <div class="faq-answer">
-            Netflix is flexible. There are no contracts and no cancellation fees. You can easily cancel your account online.
-        </div>
-    </div>
-
-    <div class="faq-item">
-        <button class="faq-question">
-            What can I watch on Netflix?
-            <span class="icon">+</span>
-        </button>
-        <div class="faq-answer">
-            Netflix has an extensive library of feature films, documentaries, TV shows, anime, and Netflix originals.
-        </div>
-    </div>
-
-    <div class="faq-item">
-        <button class="faq-question">
-            Is Netflix good for kids?
-            <span class="icon">+</span>
-        </button>
-        <div class="faq-answer">
-            The Netflix Kids experience is included in your membership to give parents control while kids enjoy family-friendly content.
+            Watch Netflix on multiple devices for one fixed monthly fee.
         </div>
     </div>
 </section>
-    
+
 <footer>
     <p>© 2025 Netflix Clone — Mini Project</p>
 </footer>
 
+<!-- JS -->
 <script>
+    // Header scroll effect
     window.addEventListener("scroll", () => {
-        const header = document.getElementById("header");
-        header.classList.toggle("scrolled", window.scrollY > 100);
+        document.getElementById("header")
+            .classList.toggle("scrolled", window.scrollY > 80);
+    });
+
+    // Show username
+    document.getElementById("userName").innerText =
+        localStorage.getItem("username") || "Profile";
+
+    // Logout
+    function logout() {
+        localStorage.removeItem("isLoggedIn");
+        localStorage.removeItem("username");
+        window.location.replace("index.html");
+    }
+
+    // FAQ toggle
+    document.querySelectorAll(".faq-question").forEach(q => {
+        q.addEventListener("click", () => {
+            const item = q.parentElement;
+            item.classList.toggle("active");
+            q.querySelector(".icon").innerText =
+                item.classList.contains("active") ? "×" : "+";
+        });
     });
 </script>
 
