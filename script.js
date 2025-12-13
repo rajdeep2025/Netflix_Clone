@@ -1,7 +1,7 @@
 // Login credentials
 const validCredentials = {
-    username: "rajdeep",
-    password: "rinkibabu"
+    username: "RKGIT",
+    password: "RKGIT123@"
 };
 
 // Get form elements
