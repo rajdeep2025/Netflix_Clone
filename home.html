@@ -52,14 +52,14 @@
 </header>
 
 <!-- HERO -->
-<section class="hero"
-    style="
-        background:
-        linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(20,20,20,1)),
-        url('stranger-things.jpeg');
-        background-size: cover;
-        background-position: center;
-    ">
+<div class="hero-video-container">
+    <video class="hero-video" autoplay muted loop playsinline>
+        <source src="stranger-things-trailer.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <div class="hero-overlay"></div>
+
     <div class="hero-content">
         <h1>Stranger Things</h1>
         <p>
@@ -71,7 +71,8 @@
             <button class="btn btn-info">ⓘ More Info</button>
         </div>
     </div>
-</section>
+</div>
+
 
 <!-- TRENDING NOW -->
 <section class="movie-row">
