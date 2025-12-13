@@ -67,8 +67,6 @@ nav a:hover {
 
 .hero {
     height: 80vh;
-    background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(20,20,20,1)),
-                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%23222" width="1200" height="600"/><text x="50%" y="50%" fill="%23444" font-size="48" text-anchor="middle" dominant-baseline="middle" font-family="Arial">HERO BANNER</text></svg>');
     background-size: cover;
     background-position: center;
     display: flex;
