@@ -51,9 +51,18 @@
     </div>
 </header>
 
-<!-- HERO -->
+<!-- HERO VIDEO SECTION -->
 <div class="hero-video-container">
-    <video class="hero-video" autoplay muted loop playsinline>
+
+    <video
+        class="hero-video"
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="auto"
+        poster="stranger-things.jpeg"
+    >
         <source src="stranger-things-trailer.mp4" type="video/mp4">
         Your browser does not support the video tag.
     </video>
@@ -71,7 +80,9 @@
             <button class="btn btn-info">ⓘ More Info</button>
         </div>
     </div>
+
 </div>
+
 
 
 <!-- TRENDING NOW -->
@@ -223,6 +234,16 @@
                 item.classList.contains("active") ? "×" : "+";
         });
     });
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const video = document.querySelector(".hero-video");
+    if (video) {
+        video.play().catch(() => {
+            console.log("Autoplay blocked by browser");
+        });
+    }
+});
 </script>
 
 </body>
