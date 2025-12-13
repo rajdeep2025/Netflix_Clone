@@ -40,6 +40,22 @@ nav {
     flex: 1;
 }
 
+/* MOBILE NAV SCROLL */
+@media (max-width: 768px) {
+    nav {
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    nav::-webkit-scrollbar {
+        display: none;
+    }
+
+    nav a {
+        flex-shrink: 0;
+    }
+}
+
 nav a {
     color: #e5e5e5;
     text-decoration: none;
@@ -62,7 +78,7 @@ nav a {
     width: 0;
     opacity: 0;
     background: #000;
-    color: white;
+    color: #fff;
     border: 1px solid #fff;
     padding: 6px;
     transition: all 0.3s;
@@ -96,7 +112,7 @@ nav a {
     border-radius: 4px;
 }
 
-.profile-container:hover .profile-dropdown {
+.profile-dropdown.show {
     display: block;
 }
 
@@ -188,10 +204,18 @@ nav a {
     height: 450px;
 }
 
+/* FAQ SEPARATOR */
+.faq-separator {
+    margin-top: 80px;
+    text-align: center;
+    color: #777;
+}
+
 /* FAQ */
 .faq-section {
-    background: black;
-    padding: 60px 12%;
+    background: #000;
+    padding: 80px 12%;
+    border-top: 8px solid #222;
 }
 
 .faq-title {
