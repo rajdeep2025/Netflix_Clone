@@ -2,35 +2,220 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Netflix Login</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    <!-- Link CSS -->
-    <link rel="stylesheet" href="style.css">
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><defs><linearGradient id="grad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" style="stop-color:%23000;stop-opacity:0.6" /><stop offset="100%" style="stop-color:%23000;stop-opacity:0.9" /></linearGradient></defs><rect fill="%23141414" width="1200" height="800"/><rect fill="url(%23grad)" width="1200" height="800"/></svg>');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .login-header {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: #e50914;
+            font-size: 32px;
+            font-weight: bold;
+            letter-spacing: -2px;
+        }
+
+        .login-container {
+            background-color: rgba(0, 0, 0, 0.75);
+            padding: 60px 68px 40px;
+            border-radius: 4px;
+            width: 450px;
+            max-width: 90%;
+        }
+
+        h1 {
+            color: #fff;
+            font-size: 32px;
+            margin-bottom: 28px;
+            font-weight: 500;
+        }
+
+        .input-group {
+            margin-bottom: 16px;
+        }
+
+        input {
+            width: 100%;
+            padding: 16px 20px;
+            background-color: #333;
+            border: none;
+            border-radius: 4px;
+            color: #fff;
+            font-size: 16px;
+            outline: none;
+        }
+
+        input:focus {
+            background-color: #454545;
+        }
+
+        input::placeholder {
+            color: #8c8c8c;
+        }
+
+        .error-message {
+            color: #e87c03;
+            font-size: 13px;
+            margin-top: 6px;
+            display: none;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 16px;
+            background-color: #e50914;
+            border: none;
+            border-radius: 4px;
+            color: #fff;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            margin-top: 40px;
+            transition: background-color 0.3s;
+        }
+
+        .login-btn:hover {
+            background-color: #f40612;
+        }
+
+        .remember-me {
+            display: flex;
+            align-items: center;
+            margin-top: 12px;
+            color: #b3b3b3;
+            font-size: 13px;
+        }
+
+        .remember-me input {
+            width: auto;
+            margin-right: 8px;
+        }
+
+        .help-links {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 16px;
+            font-size: 13px;
+        }
+
+        .help-links a {
+            color: #b3b3b3;
+            text-decoration: none;
+        }
+
+        .help-links a:hover {
+            text-decoration: underline;
+        }
+
+        .signup-link {
+            color: #737373;
+            font-size: 16px;
+            margin-top: 80px;
+        }
+
+        .signup-link a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .signup-link a:hover {
+            text-decoration: underline;
+        }
+
+        .captcha {
+            color: #8c8c8c;
+            font-size: 13px;
+            margin-top: 16px;
+            line-height: 1.4;
+        }
+
+        .captcha a {
+            color: #0071eb;
+            text-decoration: none;
+        }
+
+        .captcha a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .login-container {
+                padding: 40px 30px;
+            }
+
+            .login-header {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 28px;
+            }
+        }
+    </style>
 </head>
-<body class="login-body">
-
-    <div class="login-box">
-        <h1>Sign In</h1>
-
-        <input 
-            type="text" 
-            id="username" 
-            placeholder="Email or phone number"
-        >
-
-        <input 
-            type="password" 
-            id="password" 
-            placeholder="Password"
-        >
-
-        <button onclick="login()">Sign In</button>
-
-        <p id="error"></p>
+<body>
+    <div class="login-header">
+        <div class="logo">NETFLIX</div>
     </div>
 
-    <!-- Link JavaScript -->
-    <script src="script.js"></script>
+    <div class="login-container">
+        <h1>Sign In</h1>
+        <form id="loginForm">
+            <div class="input-group">
+                <input type="text" id="username" placeholder="Username" required>
+                <div class="error-message" id="usernameError">Please enter a valid username.</div>
+            </div>
+            <div class="input-group">
+                <input type="password" id="password" placeholder="Password" required>
+                <div class="error-message" id="passwordError">Your password must contain at least 4 characters.</div>
+            </div>
+            <div class="error-message" id="loginError">Incorrect username or password.</div>
+            <button type="submit" class="login-btn">Sign In</button>
+            <div class="remember-me">
+                <input type="checkbox" id="rememberMe">
+                <label for="rememberMe">Remember me</label>
+            </div>
+            <div class="help-links">
+                <a href="#">Need help?</a>
+            </div>
+        </form>
+        <div class="signup-link">
+            New to Netflix? <a href="#">Sign up now</a>.
+        </div>
+        <div class="captcha">
+            This page is protected by Google reCAPTCHA to ensure you're not a bot. <a href="#">Learn more</a>.
+        </div>
+    </div>
 
+    <script src="script.js"></script>
 </body>
 </html>
