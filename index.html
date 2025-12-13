@@ -4,18 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Netflix Login</title>
+
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
         }
 
         body {
-            font-family: 'Helvetica Neue', Arial, sans-serif;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><defs><linearGradient id="grad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" style="stop-color:%23000;stop-opacity:0.6" /><stop offset="100%" style="stop-color:%23000;stop-opacity:0.9" /></linearGradient></defs><rect fill="%23141414" width="1200" height="800"/><rect fill="url(%23grad)" width="1200" height="800"/></svg>');
-            background-size: cover;
-            background-position: center;
+            background-color: #141414;
             height: 100vh;
             display: flex;
             justify-content: center;
@@ -24,58 +23,52 @@
 
         .login-header {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            padding: 20px 50px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            color: #e50914;
+            top: 20px;
+            left: 40px;
             font-size: 32px;
             font-weight: bold;
-            letter-spacing: -2px;
+            color: #e50914;
         }
 
         .login-container {
-            background-color: rgba(0, 0, 0, 0.75);
-            padding: 60px 68px 40px;
+            background: rgba(0, 0, 0, 0.75);
+            padding: 60px;
+            width: 420px;
             border-radius: 4px;
-            width: 450px;
-            max-width: 90%;
+            color: white;
         }
 
         h1 {
-            color: #fff;
-            font-size: 32px;
-            margin-bottom: 28px;
-            font-weight: 500;
+            margin-bottom: 25px;
         }
 
         .input-group {
+            position: relative;
             margin-bottom: 16px;
         }
 
         input {
             width: 100%;
-            padding: 16px 20px;
-            background-color: #333;
+            padding: 15px;
+            background: #333;
             border: none;
             border-radius: 4px;
-            color: #fff;
+            color: white;
             font-size: 16px;
-            outline: none;
         }
 
         input:focus {
-            background-color: #454545;
+            outline: none;
+            background: #454545;
         }
 
-        input::placeholder {
-            color: #8c8c8c;
+        .toggle-password {
+            position: absolute;
+            right: 15px;
+            top: 16px;
+            cursor: pointer;
+            color: #aaa;
+            font-size: 14px;
         }
 
         .error-message {
@@ -91,131 +84,75 @@
 
         .login-btn {
             width: 100%;
-            padding: 16px;
-            background-color: #e50914;
+            padding: 15px;
+            background: #e50914;
             border: none;
             border-radius: 4px;
-            color: #fff;
             font-size: 16px;
-            font-weight: 500;
+            font-weight: bold;
+            color: white;
             cursor: pointer;
-            margin-top: 40px;
-            transition: background-color 0.3s;
+            margin-top: 30px;
         }
 
-        .login-btn:hover {
-            background-color: #f40612;
+        .login-btn:disabled {
+            background: #b20710;
+            cursor: not-allowed;
         }
 
         .remember-me {
-            display: flex;
-            align-items: center;
-            margin-top: 12px;
-            color: #b3b3b3;
+            margin-top: 15px;
             font-size: 13px;
-        }
-
-        .remember-me input {
-            width: auto;
-            margin-right: 8px;
-        }
-
-        .help-links {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 16px;
-            font-size: 13px;
-        }
-
-        .help-links a {
             color: #b3b3b3;
-            text-decoration: none;
         }
 
-        .help-links a:hover {
-            text-decoration: underline;
-        }
-
-        .signup-link {
+        .signup {
+            margin-top: 50px;
+            font-size: 15px;
             color: #737373;
-            font-size: 16px;
-            margin-top: 80px;
         }
 
-        .signup-link a {
-            color: #fff;
-            text-decoration: none;
-        }
-
-        .signup-link a:hover {
-            text-decoration: underline;
-        }
-
-        .captcha {
-            color: #8c8c8c;
-            font-size: 13px;
-            margin-top: 16px;
-            line-height: 1.4;
-        }
-
-        .captcha a {
-            color: #0071eb;
-            text-decoration: none;
-        }
-
-        .captcha a:hover {
-            text-decoration: underline;
-        }
-
-        @media (max-width: 768px) {
-            .login-container {
-                padding: 40px 30px;
-            }
-
-            .login-header {
-                padding: 20px;
-            }
-
-            h1 {
-                font-size: 28px;
-            }
+        .signup span {
+            color: white;
+            cursor: pointer;
         }
     </style>
 </head>
+
 <body>
-    <div class="login-header">
-        <div class="logo">NETFLIX</div>
-    </div>
 
-    <div class="login-container">
-        <h1>Sign In</h1>
-        <form id="loginForm">
-            <div class="input-group">
-                <input type="text" id="username" placeholder="Username" required>
-                <div class="error-message" id="usernameError">Please enter a valid username.</div>
-            </div>
-            <div class="input-group">
-                <input type="password" id="password" placeholder="Password" required>
-                <div class="error-message" id="passwordError">Your password must contain at least 4 characters.</div>
-            </div>
-            <div class="error-message" id="loginError">Incorrect username or password.</div>
-            <button type="submit" class="login-btn">Sign In</button>
-            <div class="remember-me">
-                <input type="checkbox" id="rememberMe">
-                <label for="rememberMe">Remember me</label>
-            </div>
-            <div class="help-links">
-                <a href="#">Need help?</a>
-            </div>
-        </form>
-        <div class="signup-link">
-            New to Netflix? <a href="#">Sign up now</a>.
-        </div>
-        <div class="captcha">
-            This page is protected by Google reCAPTCHA to ensure you're not a bot. <a href="#">Learn more</a>.
-        </div>
-    </div>
+<div class="login-header">NETFLIX</div>
 
-    <script src="script.js"></script>
+<div class="login-container">
+    <h1>Sign In</h1>
+
+    <form id="loginForm">
+
+        <div class="input-group">
+            <input type="text" id="username" placeholder="Username">
+            <div class="error-message" id="usernameError">Username is required</div>
+        </div>
+
+        <div class="input-group">
+            <input type="password" id="password" placeholder="Password">
+            <span class="toggle-password" onclick="togglePassword()">Show</span>
+            <div class="error-message" id="passwordError">Password must be at least 4 characters</div>
+        </div>
+
+        <div class="error-message" id="loginError">Invalid username or password</div>
+
+        <button class="login-btn" id="loginBtn">Sign In</button>
+
+        <div class="remember-me">
+            <input type="checkbox" id="rememberMe"> Remember me
+        </div>
+    </form>
+
+    <div class="signup">
+        New to Netflix? <span>Sign up now</span>
+    </div>
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>
