@@ -1,77 +1,219 @@
-/* Reset default browser styles */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
-/* ===== LOGIN PAGE BACKGROUND ===== */
-.login-body {
-    height: 100vh;
-    background:
-        linear-gradient(
-            rgba(0, 0, 0, 0.75),
-            rgba(0, 0, 0, 0.75)
-        ),
-        url("https://assets.nflxext.com/ffe/siteui/vlv3/5f9e6c6b/background.jpg");
+body {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    background-color: #141414;
+    color: #fff;
+    overflow-x: hidden;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 20px 50px;
+    background: linear-gradient(180deg, rgba(0,0,0,0.7) 10%, transparent);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+    transition: background-color 0.3s;
+}
+
+header.scrolled {
+    background-color: #141414;
+}
+
+.logo {
+    color: #e50914;
+    font-size: 32px;
+    font-weight: bold;
+    letter-spacing: -2px;
+}
+
+nav {
+    display: flex;
+    gap: 20px;
+}
+
+nav a {
+    color: #e5e5e5;
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.3s;
+}
+
+nav a:hover {
+    color: #b3b3b3;
+}
+
+.user-section {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.search-icon, .notifications, .profile {
+    width: 30px;
+    height: 30px;
+    background-color: #e50914;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.hero {
+    height: 80vh;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(20,20,20,1)),
+                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%23222" width="1200" height="600"/><text x="50%" y="50%" fill="%23444" font-size="48" text-anchor="middle" dominant-baseline="middle" font-family="Arial">HERO BANNER</text></svg>');
     background-size: cover;
     background-position: center;
-
     display: flex;
-    justify-content: center;
     align-items: center;
+    padding: 0 50px;
+    margin-bottom: 20px;
 }
 
-/* ===== LOGIN BOX ===== */
-.login-box {
-    background: rgba(0, 0, 0, 0.75);
-    padding: 60px;
-    width: 350px;
-    border-radius: 4px;
+.hero-content {
+    max-width: 500px;
 }
 
-/* Login heading */
-.login-box h1 {
-    margin-bottom: 25px;
-    font-size: 32px;
-}
-
-/* Input fields */
-.login-box input {
-    width: 100%;
-    padding: 14px;
+.hero-content h1 {
+    font-size: 48px;
     margin-bottom: 15px;
-    background-color: #333;
-    border: none;
-    outline: none;
-    color: #fff;
-    font-size: 16px;
-    border-radius: 4px;
-}
-
-/* Sign In button */
-.login-box button {
-    width: 100%;
-    padding: 14px;
-    background-color: #e50914;
-    border: none;
-    color: white;
-    font-size: 16px;
     font-weight: bold;
-    cursor: pointer;
+}
+
+.hero-content p {
+    font-size: 18px;
+    margin-bottom: 20px;
+    line-height: 1.4;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.btn {
+    padding: 12px 30px;
+    font-size: 16px;
+    border: none;
     border-radius: 4px;
-    margin-top: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.3s;
 }
 
-/* Button hover effect */
-.login-box button:hover {
-    background-color: #f6121d;
+.btn-play {
+    background-color: #fff;
+    color: #000;
 }
 
-/* Error message */
-#error {
-    margin-top: 15px;
-    color: #e87c03;
-    font-size: 14px;
+.btn-play:hover {
+    background-color: rgba(255,255,255,0.75);
+}
+
+.btn-info {
+    background-color: rgba(109,109,110,0.7);
+    color: #fff;
+}
+
+.btn-info:hover {
+    background-color: rgba(109,109,110,0.4);
+}
+
+.movie-row {
+    padding: 0 50px;
+    margin-bottom: 40px;
+}
+
+.row-title {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.row-posters {
+    display: flex;
+    gap: 10px;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    padding: 20px 0;
+    scrollbar-width: none;
+}
+
+.row-posters::-webkit-scrollbar {
+    display: none;
+}
+
+.movie-poster {
+    min-width: 200px;
+    height: 300px;
+    background-color: #2a2a2a;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: transform 0.3s;
+    position: relative;
+    overflow: hidden;
+}
+
+.movie-poster:hover {
+    transform: scale(1.08);
+    z-index: 10;
+}
+
+.poster-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.large-row .movie-poster {
+    min-width: 300px;
+    height: 450px;
+}
+
+footer {
+    padding: 50px;
+    color: #808080;
+    font-size: 13px;
+}
+
+@media (max-width: 768px) {
+    header {
+        padding: 15px 20px;
+    }
+
+    nav {
+        display: none;
+    }
+
+    .hero {
+        padding: 0 20px;
+    }
+
+    .hero-content h1 {
+        font-size: 32px;
+    }
+
+    .movie-row {
+        padding: 0 20px;
+    }
+
+    .movie-poster {
+        min-width: 150px;
+        height: 225px;
+    }
+
+    .large-row .movie-poster {
+        min-width: 250px;
+        height: 375px;
+    }
 }
