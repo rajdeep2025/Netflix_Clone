@@ -4,7 +4,7 @@ function login() {
     const password = document.getElementById("password").value;
 
     // Simple validation (fake auth)
-    if (username === "admin" && password === "netflix") {
+    if (username === "rajdeep" && password === "rinkibabu") {
 
         // Save login state in browser
         localStorage.setItem("loggedIn", "true");
