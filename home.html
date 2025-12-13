@@ -9,7 +9,7 @@
 
 <body>
 
-<!-- 🔐 AUTH PROTECTION -->
+<!-- 🔐 PROTECT HOME PAGE -->
 <script>
     if (localStorage.getItem("isLoggedIn") !== "true") {
         window.location.replace("index.html");
@@ -29,11 +29,22 @@
         <a href="#">Browse by Languages</a>
     </nav>
 
-    <!-- PROFILE DROPDOWN -->
+    <!-- SEARCH -->
+    <div class="search-container">
+        <span class="search-icon" onclick="toggleSearch()">🔍</span>
+        <input
+            type="text"
+            id="searchInput"
+            placeholder="Search movies..."
+            oninput="searchMovies()"
+        >
+    </div>
+
+    <!-- PROFILE -->
     <div class="profile-container">
         <div class="profile-icon">👤</div>
         <div class="profile-dropdown">
-            <p id="userName">User</p>
+            <p id="profileName"></p>
             <hr>
             <button onclick="logout()">Logout</button>
         </div>
@@ -42,11 +53,13 @@
 
 <!-- HERO -->
 <section class="hero"
-    style="background:
+    style="
+        background:
         linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(20,20,20,1)),
         url('stranger-things.jpeg');
         background-size: cover;
-        background-position: center;">
+        background-position: center;
+    ">
     <div class="hero-content">
         <h1>Stranger Things</h1>
         <p>
@@ -60,16 +73,46 @@
     </div>
 </section>
 
-<!-- MOVIE ROW -->
+<!-- TRENDING -->
 <section class="movie-row">
     <h2 class="row-title">Trending Now</h2>
     <div class="row-posters">
-        <img src="dark.jpeg" class="poster-img">
-        <img src="breaking-bad.jpeg" class="poster-img">
-        <img src="money-hiest.jpeg" class="poster-img">
-        <img src="narcos.jpeg" class="poster-img">
-        <img src="crown.jpeg" class="poster-img">
-        <img src="bridegerton.jpeg" class="poster-img">
+        <img src="dark.jpeg" class="poster-img" alt="Dark">
+        <img src="breaking-bad.jpeg" class="poster-img" alt="Breaking Bad">
+        <img src="money-hiest.jpeg" class="poster-img" alt="Money Heist">
+        <img src="narcos.jpeg" class="poster-img" alt="Narcos">
+        <img src="crown.jpeg" class="poster-img" alt="The Crown">
+        <img src="bridegerton.jpeg" class="poster-img" alt="Bridgerton">
+    </div>
+</section>
+
+<!-- ORIGINALS -->
+<section class="movie-row large-row">
+    <h2 class="row-title">Netflix Originals</h2>
+    <div class="row-posters">
+        <img src="black-mirror.jpeg" class="poster-img" alt="Black Mirror">
+        <img src="extraction.jpeg" class="poster-img" alt="Extraction">
+        <img src="gray-man.jpeg" class="poster-img" alt="The Gray Man">
+        <img src="old-guard.jpeg" class="poster-img" alt="The Old Guard">
+    </div>
+</section>
+
+<!-- ACTION -->
+<section class="movie-row">
+    <h2 class="row-title">Action Movies</h2>
+    <div class="row-posters">
+        <img src="6-underground.jpeg" class="poster-img" alt="6 Underground">
+        <img src="extraction.jpeg" class="poster-img" alt="Extraction">
+        <img src="gray-man.jpeg" class="poster-img" alt="The Gray Man">
+    </div>
+</section>
+
+<!-- COMEDY -->
+<section class="movie-row">
+    <h2 class="row-title">Comedies</h2>
+    <div class="row-posters">
+        <img src="murder-mystery.jpeg" class="poster-img" alt="Murder Mystery">
+        <img src="kissing-booth.jpeg" class="poster-img" alt="The Kissing Booth">
     </div>
 </section>
 
@@ -83,7 +126,7 @@
             <span class="icon">+</span>
         </button>
         <div class="faq-answer">
-            Netflix is a streaming service offering movies, TV shows, documentaries, and more.
+            Netflix is a streaming service that offers movies, TV shows, and documentaries.
         </div>
     </div>
 
@@ -93,7 +136,7 @@
             <span class="icon">+</span>
         </button>
         <div class="faq-answer">
-            Watch Netflix on multiple devices for one fixed monthly fee.
+            Netflix offers various plans at a fixed monthly fee.
         </div>
     </div>
 </section>
@@ -102,7 +145,7 @@
     <p>© 2025 Netflix Clone — Mini Project</p>
 </footer>
 
-<!-- JS -->
+<!-- SCRIPTS -->
 <script>
     // Header scroll effect
     window.addEventListener("scroll", () => {
@@ -110,15 +153,32 @@
             .classList.toggle("scrolled", window.scrollY > 80);
     });
 
-    // Show username
-    document.getElementById("userName").innerText =
+    // Profile name
+    document.getElementById("profileName").innerText =
         localStorage.getItem("username") || "Profile";
 
     // Logout
     function logout() {
-        localStorage.removeItem("isLoggedIn");
-        localStorage.removeItem("username");
+        localStorage.clear();
         window.location.replace("index.html");
+    }
+
+    // Search
+    function toggleSearch() {
+        const input = document.getElementById("searchInput");
+        input.classList.toggle("active");
+        input.value = "";
+        searchMovies();
+    }
+
+    function searchMovies() {
+        const query = document.getElementById("searchInput").value.toLowerCase();
+        document.querySelectorAll(".poster-img").forEach(img => {
+            img.style.display =
+                query === "" || img.alt.toLowerCase().includes(query)
+                    ? ""
+                    : "none";
+        });
     }
 
     // FAQ toggle
