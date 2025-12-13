@@ -1,28 +1,29 @@
 // ==========================================
-// SIMPLE HASH FUNCTION (DEMO PURPOSE ONLY)
+// SIMPLE HASH FUNCTION (DEMO ONLY)
 // ==========================================
 function hashPassword(password) {
     let hash = 0;
     for (let i = 0; i < password.length; i++) {
         hash = (hash << 5) - hash + password.charCodeAt(i);
-        hash = hash & hash; // Convert to 32bit integer
+        hash |= 0;
     }
     return hash.toString();
 }
 
 // ==========================================
-// USER DATABASE (LOCAL STORAGE BASED)
+// INITIAL USER SETUP (RUNS ONLY ONCE)
 // ==========================================
-const DEFAULT_USERS = [
-    { username: "RKGIT", password: hashPassword("RKGIT123@") },
-    { username: "rajdeep", password: hashPassword("rajdeep123@") },
-    { username: "rahul", password: hashPassword("rahul123@") }
-    { username: "prithvi", password: hashPassword("prithvi123@") }
-];
+if (!localStorage.getItem("users")) {
+    const defaultUsers = [
+        { username: "RKGIT", password: hashPassword("RKGIT123@") },
+        { username: "rajdeep", password: hashPassword("rajdeep@123") },
+        { username: "admin", password: hashPassword("admin123") }
+    ];
+    localStorage.setItem("users", JSON.stringify(defaultUsers));
+}
 
-// Load users from storage or init default
-let USERS = JSON.parse(localStorage.getItem("users")) || DEFAULT_USERS;
-localStorage.setItem("users", JSON.stringify(USERS));
+// Load users
+const USERS = JSON.parse(localStorage.getItem("users"));
 
 // ==========================================
 // DOM ELEMENTS
@@ -38,7 +39,7 @@ const loginError = document.getElementById("loginError");
 const rememberMe = document.getElementById("rememberMe");
 
 // ==========================================
-// LOGIN ATTEMPT LIMIT
+// LOGIN ATTEMPTS
 // ==========================================
 let attempts = Number(localStorage.getItem("loginAttempts")) || 0;
 const MAX_ATTEMPTS = 3;
@@ -55,7 +56,7 @@ window.onload = () => {
 };
 
 // ==========================================
-// FORM SUBMISSION
+// LOGIN HANDLER
 // ==========================================
 loginForm.addEventListener("submit", function (e) {
     e.preventDefault();
@@ -66,7 +67,7 @@ loginForm.addEventListener("submit", function (e) {
     loginError.classList.remove("show");
 
     if (attempts >= MAX_ATTEMPTS) {
-        loginError.textContent = "Too many failed attempts. Try again later.";
+        loginError.textContent = "Too many failed attempts. Refresh page.";
         loginError.classList.add("show");
         return;
     }
@@ -74,32 +75,28 @@ loginForm.addEventListener("submit", function (e) {
     const username = usernameInput.value.trim();
     const password = passwordInput.value;
 
-    let hasError = false;
-
     if (username === "") {
         usernameError.classList.add("show");
-        hasError = true;
+        return;
     }
 
     if (password.length < 4) {
         passwordError.classList.add("show");
-        hasError = true;
+        return;
     }
-
-    if (hasError) return;
 
     loginBtn.textContent = "Signing In...";
     loginBtn.disabled = true;
 
     setTimeout(() => {
-        const hashedPassword = hashPassword(password);
+        const hashed = hashPassword(password);
 
         const validUser = USERS.find(
-            user => user.username === username && user.password === hashedPassword
+            u => u.username === username && u.password === hashed
         );
 
         if (validUser) {
-            // Success
+            // SUCCESS
             localStorage.setItem("isLoggedIn", "true");
             localStorage.setItem("username", username);
             localStorage.setItem("loginAttempts", "0");
@@ -112,20 +109,17 @@ loginForm.addEventListener("submit", function (e) {
 
             window.location.href = "home.html";
         } else {
-            // Failure
+            // FAIL
             attempts++;
             localStorage.setItem("loginAttempts", attempts.toString());
 
-            loginError.textContent =
-                attempts >= MAX_ATTEMPTS
-                    ? "Account temporarily locked."
-                    : "Invalid username or password.";
-
+            loginError.textContent = "Invalid username or password";
             loginError.classList.add("show");
+
             loginBtn.textContent = "Sign In";
             loginBtn.disabled = false;
         }
-    }, 1200);
+    }, 1000);
 });
 
 // ==========================================
@@ -147,31 +141,4 @@ passwordInput.addEventListener("input", () => {
 function togglePassword() {
     passwordInput.type =
         passwordInput.type === "password" ? "text" : "password";
-}
-
-// ==========================================
-// SIGN UP (BASIC DEMO FUNCTION)
-// ==========================================
-function signUp() {
-    const username = usernameInput.value.trim();
-    const password = passwordInput.value;
-
-    if (username === "" || password.length < 4) {
-        alert("Enter valid username and password");
-        return;
-    }
-
-    const userExists = USERS.some(user => user.username === username);
-    if (userExists) {
-        alert("User already exists");
-        return;
-    }
-
-    USERS.push({
-        username: username,
-        password: hashPassword(password)
-    });
-
-    localStorage.setItem("users", JSON.stringify(USERS));
-    alert("Sign up successful. You can now log in.");
 }
