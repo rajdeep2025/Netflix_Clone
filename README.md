@@ -44,6 +44,8 @@ This project demonstrates client-side authentication, protected page navigation,
 
 ## ✨ Author
 
-rajdeep
+Rajdeep Singh 
+Rahul Kumar
+Prithvi Tomar
 
 
