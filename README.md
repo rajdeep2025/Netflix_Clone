@@ -30,7 +30,7 @@ This project demonstrates client-side authentication, protected page navigation,
 
 ## 🌐 Live Demo
 
-🔗 https://your-username.github.io/netflix-clone/
+🔗 https://rajdeep2025.github.io/Netflix_Clone/
 
 ---
 
