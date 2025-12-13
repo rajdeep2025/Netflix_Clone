@@ -2,49 +2,225 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Netflix</title>
-
-    <!-- Link CSS -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Netflix Clone</title>
     <link rel="stylesheet" href="style.css">
 </head>
+<body>
+    <header id="header">
+        <div class="logo">NETFLIX</div>
+        <nav>
+            <a href="#">Home</a>
+            <a href="#">TV Shows</a>
+            <a href="#">Movies</a>
+            <a href="#">New & Popular</a>
+            <a href="#">My List</a>
+            <a href="#">Browse by Languages</a>
+        </nav>
+        <div class="user-section">
+            <div class="search-icon"></div>
+            <div class="notifications"></div>
+            <div class="profile"></div>
+        </div>
+    </header>
 
-<body onload="checkLogin()">
-
-    <!-- NAVBAR -->
-    <div class="navbar">
-        <img
-            src="https://upload.wikimedia.org/wikipedia/commons/7/7a/Logonetflix.png"
-            alt="Netflix Logo"
-        >
-        <button onclick="logout()">Logout</button>
-    </div>
-
-    <!-- MOVIE ROW -->
-    <div class="row">
-        <h2>Trending Now</h2>
-
-        <div class="row-posters">
-            <img src="https://image.tmdb.org/t/p/w300/8UlWHLMpgZm9bx6QYh0NFoq67TZ.jpg">
-            <img src="https://image.tmdb.org/t/p/w300/qJ2tW6WMUDux911r6m7haRef0WH.jpg">
-            <img src="https://image.tmdb.org/t/p/w300/4m1Au3YkjqsxF8iwQy0fPYSxE0h.jpg">
-            <img src="https://image.tmdb.org/t/p/w300/lPsD10PP4rgUGiGR4CCXA6iY0QQ.jpg">
-            <img src="https://image.tmdb.org/t/p/w300/zp0qMztgs7h5o7r4H4b5xv8JZ2F.jpg">
+    <div class="hero">
+        <div class="hero-content">
+            <h1>Stranger Things</h1>
+            <p>When a young boy vanishes, a small town uncovers a mystery involving secret experiments, terrifying supernatural forces and one strange little girl.</p>
+            <div class="hero-buttons">
+                <button class="btn btn-play">▶ Play</button>
+                <button class="btn btn-info">ⓘ More Info</button>
+            </div>
         </div>
     </div>
 
-    <!-- JavaScript -->
+    <div class="movie-row">
+        <h2 class="row-title">Trending Now</h2>
+        <div class="row-posters">
+            <div class="movie-poster">
+                <svg width="200" height="300" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="200" height="300" fill="#1a1a1a"/>
+                    <text x="50%" y="45%" fill="#e50914" font-size="24" text-anchor="middle" font-weight="bold">THE</text>
+                    <text x="50%" y="55%" fill="#e50914" font-size="24" text-anchor="middle" font-weight="bold">WITCHER</text>
+                </svg>
+            </div>
+            <div class="movie-poster">
+                <svg width="200" height="300" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="200" height="300" fill="#0f3460"/>
+                    <text x="50%" y="50%" fill="#fff" font-size="18" text-anchor="middle" font-weight="bold">DARK</text>
+                </svg>
+            </div>
+            <div class="movie-poster">
+                <svg width="200" height="300" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="200" height="300" fill="#8b0000"/>
+                    <text x="50%" y="45%" fill="#fff" font-size="16" text-anchor="middle" font-weight="bold">MONEY</text>
+                    <text x="50%" y="55%" fill="#fff" font-size="16" text-anchor="middle" font-weight="bold">HEIST</text>
+                </svg>
+            </div>
+            <div class="movie-poster">
+                <svg width="200" height="300" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="200" height="300" fill="#2d4a2e"/>
+                    <text x="50%" y="45%" fill="#f0e68c" font-size="18" text-anchor="middle" font-weight="bold">BREAKING</text>
+                    <text x="50%" y="55%" fill="#f0e68c" font-size="18" text-anchor="middle" font-weight="bold">BAD</text>
+                </svg>
+            </div>
+            <div class="movie-poster">
+                <svg width="200" height="300" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="200" height="300" fill="#4a1a1a"/>
+                    <text x="50%" y="50%" fill="#ffa500" font-size="20" text-anchor="middle" font-weight="bold">NARCOS</text>
+                </svg>
+            </div>
+            <div class="movie-poster">
+                <svg width="200" height="300" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="200" height="300" fill="#1a2a3a"/>
+                    <text x="50%" y="45%" fill="#87ceeb" font-size="18" text-anchor="middle" font-weight="bold">THE</text>
+                    <text x="50%" y="55%" fill="#87ceeb" font-size="18" text-anchor="middle" font-weight="bold">CROWN</text>
+                </svg>
+            </div>
+            <div class="movie-poster">
+                <svg width="200" height="300" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="200" height="300" fill="#2f1a3a"/>
+                    <text x="50%" y="50%" fill="#d8bfd8" font-size="16" text-anchor="middle" font-weight="bold">BRIDGERTON</text>
+                </svg>
+            </div>
+        </div>
+    </div>
+
+    <div class="movie-row large-row">
+        <h2 class="row-title">Netflix Originals</h2>
+        <div class="row-posters">
+            <div class="movie-poster">
+                <svg width="300" height="450" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="300" height="450" fill="#1a0a0a"/>
+                    <text x="50%" y="45%" fill="#e50914" font-size="28" text-anchor="middle" font-weight="bold">STRANGER</text>
+                    <text x="50%" y="55%" fill="#e50914" font-size="28" text-anchor="middle" font-weight="bold">THINGS</text>
+                </svg>
+            </div>
+            <div class="movie-poster">
+                <svg width="300" height="450" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="300" height="450" fill="#3a1a1a"/>
+                    <text x="50%" y="45%" fill="#ff6347" font-size="24" text-anchor="middle" font-weight="bold">BLACK</text>
+                    <text x="50%" y="55%" fill="#ff6347" font-size="24" text-anchor="middle" font-weight="bold">MIRROR</text>
+                </svg>
+            </div>
+            <div class="movie-poster">
+                <svg width="300" height="450" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="300" height="450" fill="#0a1a2a"/>
+                    <text x="50%" y="45%" fill="#40e0d0" font-size="26" text-anchor="middle" font-weight="bold">OZARK</text>
+                </svg>
+            </div>
+            <div class="movie-poster">
+                <svg width="300" height="450" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="300" height="450" fill="#2a1a0a"/>
+                    <text x="50%" y="45%" fill="#ffd700" font-size="24" text-anchor="middle" font-weight="bold">THE</text>
+                    <text x="50%" y="55%" fill="#ffd700" font-size="24" text-anchor="middle" font-weight="bold">UMBRELLA</text>
+                    <text x="50%" y="65%" fill="#ffd700" font-size="24" text-anchor="middle" font-weight="bold">ACADEMY</text>
+                </svg>
+            </div>
+            <div class="movie-poster">
+                <svg width="300" height="450" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="300" height="450" fill="#1a3a1a"/>
+                    <text x="50%" y="50%" fill="#90ee90" font-size="22" text-anchor="middle" font-weight="bold">SQUID GAME</text>
+                </svg>
+            </div>
+        </div>
+    </div>
+
+    <div class="movie-row">
+        <h2 class="row-title">Action Movies</h2>
+        <div class="row-posters">
+            <div class="movie-poster">
+                <svg width="200" height="300" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="200" height="300" fill="#3a2a1a"/>
+                    <text x="50%" y="45%" fill="#ff8c00" font-size="20" text-anchor="middle" font-weight="bold">EXTRACTION</text>
+                </svg>
+            </div>
+            <div class="movie-poster">
+                <svg width="200" height="300" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="200" height="300" fill="#1a1a3a"/>
+                    <text x="50%" y="45%" fill="#87cefa" font-size="18" text-anchor="middle" font-weight="bold">THE</text>
+                    <text x="50%" y="55%" fill="#87cefa" font-size="18" text-anchor="middle" font-weight="bold">OLD GUARD</text>
+                </svg>
+            </div>
+            <div class="movie-poster">
+                <svg width="200" height="300" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="200" height="300" fill="#2a1a1a"/>
+                    <text x="50%" y="50%" fill="#dc143c" font-size="18" text-anchor="middle" font-weight="bold">6 UNDERGROUND</text>
+                </svg>
+            </div>
+            <div class="movie-poster">
+                <svg width="200" height="300" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="200" height="300" fill="#1a2a1a"/>
+                    <text x="50%" y="50%" fill="#32cd32" font-size="16" text-anchor="middle" font-weight="bold">TRIPLE FRONTIER</text>
+                </svg>
+            </div>
+            <div class="movie-poster">
+                <svg width="200" height="300" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="200" height="300" fill="#3a1a2a"/>
+                    <text x="50%" y="50%" fill="#ff69b4" font-size="20" text-anchor="middle" font-weight="bold">RED NOTICE</text>
+                </svg>
+            </div>
+            <div class="movie-poster">
+                <svg width="200" height="300" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="200" height="300" fill="#2a2a1a"/>
+                    <text x="50%" y="45%" fill="#ffa500" font-size="18" text-anchor="middle" font-weight="bold">THE GRAY</text>
+                    <text x="50%" y="55%" fill="#ffa500" font-size="18" text-anchor="middle" font-weight="bold">MAN</text>
+                </svg>
+            </div>
+        </div>
+    </div>
+
+    <div class="movie-row">
+        <h2 class="row-title">Comedies</h2>
+        <div class="row-posters">
+            <div class="movie-poster">
+                <svg width="200" height="300" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="200" height="300" fill="#ff1493"/>
+                    <text x="50%" y="50%" fill="#fff" font-size="18" text-anchor="middle" font-weight="bold">MURDER MYSTERY</text>
+                </svg>
+            </div>
+            <div class="movie-poster">
+                <svg width="200" height="300" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="200" height="300" fill="#ffa07a"/>
+                    <text x="50%" y="45%" fill="#000" font-size="16" text-anchor="middle" font-weight="bold">THE KISSING</text>
+                    <text x="50%" y="55%" fill="#000" font-size="16" text-anchor="middle" font-weight="bold">BOOTH</text>
+                </svg>
+            </div>
+            <div class="movie-poster">
+                <svg width="200" height="300" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="200" height="300" fill="#20b2aa"/>
+                    <text x="50%" y="50%" fill="#fff" font-size="18" text-anchor="middle" font-weight="bold">WORK IT</text>
+                </svg>
+            </div>
+            <div class="movie-poster">
+                <svg width="200" height="300" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="200" height="300" fill="#ff6347"/>
+                    <text x="50%" y="50%" fill="#fff" font-size="16" text-anchor="middle" font-weight="bold">THE WRONG MISSY</text>
+                </svg>
+            </div>
+            <div class="movie-poster">
+                <svg width="200" height="300" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="200" height="300" fill="#9370db"/>
+                    <text x="50%" y="50%" fill="#fff" font-size="18" text-anchor="middle" font-weight="bold">YES DAY</text>
+                </svg>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2024 Netflix Clone. This is a demonstration project.</p>
+    </footer>
+
     <script>
-        function checkLogin() {
-            if (localStorage.getItem("loggedIn") !== "true") {
-                window.location.href = "index.html";
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
             }
-        }
-
-        function logout() {
-            localStorage.removeItem("loggedIn");
-            window.location.href = "index.html";
-        }
+        });
     </script>
-
 </body>
 </html>
