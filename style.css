@@ -18,11 +18,10 @@ header {
     width: 100%;
     padding: 20px 50px;
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    gap: 20px;
     background: linear-gradient(180deg, rgba(0,0,0,0.7), transparent);
     z-index: 1000;
-    transition: background-color 0.3s;
 }
 
 header.scrolled {
@@ -38,12 +37,40 @@ header.scrolled {
 nav {
     display: flex;
     gap: 20px;
+    flex: 1;
 }
 
 nav a {
     color: #e5e5e5;
     text-decoration: none;
     font-size: 14px;
+}
+
+/* SEARCH */
+.search-container {
+    display: flex;
+    align-items: center;
+}
+
+.search-icon {
+    cursor: pointer;
+    font-size: 18px;
+    margin-right: 8px;
+}
+
+#searchInput {
+    width: 0;
+    opacity: 0;
+    background: #000;
+    color: white;
+    border: 1px solid #fff;
+    padding: 6px;
+    transition: all 0.3s;
+}
+
+#searchInput.active {
+    width: 180px;
+    opacity: 1;
 }
 
 /* PROFILE */
@@ -62,9 +89,9 @@ nav a {
     display: none;
     position: absolute;
     right: 0;
-    top: 45px;
+    top: 40px;
     background: #141414;
-    padding: 15px;
+    padding: 12px;
     width: 160px;
     border-radius: 4px;
 }
@@ -127,7 +154,7 @@ nav a {
     color: white;
 }
 
-/* MOVIE ROW */
+/* MOVIES */
 .movie-row {
     padding: 0 50px;
     margin-bottom: 40px;
@@ -154,6 +181,11 @@ nav a {
 
 .poster-img:hover {
     transform: scale(1.08);
+}
+
+.large-row .poster-img {
+    width: 300px;
+    height: 450px;
 }
 
 /* FAQ */
