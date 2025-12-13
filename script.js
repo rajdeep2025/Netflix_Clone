@@ -1,33 +1,12 @@
-// ==========================================
-// SIMPLE HASH FUNCTION (DEMO ONLY)
-// ==========================================
-function hashPassword(password) {
-    let hash = 0;
-    for (let i = 0; i < password.length; i++) {
-        hash = (hash << 5) - hash + password.charCodeAt(i);
-        hash |= 0;
-    }
-    return hash.toString();
-}
+// ================================
+// VALID USER CREDENTIALS (Demo)
+// ================================
+const VALID_USER = "RKGIT";
+const VALID_PASS = "RKGIT123@";
 
-// ==========================================
-// INITIAL USER SETUP (RUNS ONLY ONCE)
-// ==========================================
-if (!localStorage.getItem("users")) {
-    const defaultUsers = [
-        { username: "RKGIT", password: hashPassword("RKGIT123@") },
-        { username: "rajdeep", password: hashPassword("rajdeep@123") },
-        { username: "admin", password: hashPassword("admin123") }
-    ];
-    localStorage.setItem("users", JSON.stringify(defaultUsers));
-}
-
-// Load users
-const USERS = JSON.parse(localStorage.getItem("users"));
-
-// ==========================================
+// ================================
 // DOM ELEMENTS
-// ==========================================
+// ================================
 const loginForm = document.getElementById("loginForm");
 const usernameInput = document.getElementById("username");
 const passwordInput = document.getElementById("password");
@@ -38,15 +17,9 @@ const passwordError = document.getElementById("passwordError");
 const loginError = document.getElementById("loginError");
 const rememberMe = document.getElementById("rememberMe");
 
-// ==========================================
-// LOGIN ATTEMPTS
-// ==========================================
-let attempts = Number(localStorage.getItem("loginAttempts")) || 0;
-const MAX_ATTEMPTS = 3;
-
-// ==========================================
+// ================================
 // LOAD REMEMBERED USER
-// ==========================================
+// ================================
 window.onload = () => {
     const rememberedUser = localStorage.getItem("rememberUser");
     if (rememberedUser) {
@@ -55,9 +28,9 @@ window.onload = () => {
     }
 };
 
-// ==========================================
-// LOGIN HANDLER
-// ==========================================
+// ================================
+// FORM SUBMISSION HANDLER
+// ================================
 loginForm.addEventListener("submit", function (e) {
     e.preventDefault();
 
@@ -66,65 +39,60 @@ loginForm.addEventListener("submit", function (e) {
     passwordError.classList.remove("show");
     loginError.classList.remove("show");
 
-    if (attempts >= MAX_ATTEMPTS) {
-        loginError.textContent = "Too many failed attempts. Refresh page.";
-        loginError.classList.add("show");
-        return;
-    }
-
     const username = usernameInput.value.trim();
     const password = passwordInput.value;
 
+    let hasError = false;
+
+    // Username validation
     if (username === "") {
         usernameError.classList.add("show");
-        return;
+        hasError = true;
     }
 
+    // Password validation
     if (password.length < 4) {
         passwordError.classList.add("show");
-        return;
+        hasError = true;
     }
 
+    if (hasError) return;
+
+    // Loading state
     loginBtn.textContent = "Signing In...";
     loginBtn.disabled = true;
 
+    // Fake backend delay
     setTimeout(() => {
-        const hashed = hashPassword(password);
 
-        const validUser = USERS.find(
-            u => u.username === username && u.password === hashed
-        );
+        if (username === VALID_USER && password === VALID_PASS) {
 
-        if (validUser) {
-            // SUCCESS
+            // Store login session
             localStorage.setItem("isLoggedIn", "true");
             localStorage.setItem("username", username);
-            localStorage.setItem("loginAttempts", "0");
 
+            // Remember user
             if (rememberMe.checked) {
                 localStorage.setItem("rememberUser", username);
             } else {
                 localStorage.removeItem("rememberUser");
             }
 
+            // Redirect to home page
             window.location.href = "home.html";
+
         } else {
-            // FAIL
-            attempts++;
-            localStorage.setItem("loginAttempts", attempts.toString());
-
-            loginError.textContent = "Invalid username or password";
             loginError.classList.add("show");
-
             loginBtn.textContent = "Sign In";
             loginBtn.disabled = false;
         }
-    }, 1000);
+
+    }, 1200);
 });
 
-// ==========================================
+// ================================
 // CLEAR ERRORS ON INPUT
-// ==========================================
+// ================================
 usernameInput.addEventListener("input", () => {
     usernameError.classList.remove("show");
     loginError.classList.remove("show");
@@ -135,9 +103,9 @@ passwordInput.addEventListener("input", () => {
     loginError.classList.remove("show");
 });
 
-// ==========================================
+// ================================
 // SHOW / HIDE PASSWORD
-// ==========================================
+// ================================
 function togglePassword() {
     passwordInput.type =
         passwordInput.type === "password" ? "text" : "password";
