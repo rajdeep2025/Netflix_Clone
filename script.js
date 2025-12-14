@@ -1,10 +1,4 @@
 // ================================
-// VALID USER CREDENTIALS (Demo)
-// ================================
-const VALID_USER = "RKGIT";
-const VALID_PASS = "RKGIT123@";
-
-// ================================
 // DOM ELEMENTS
 // ================================
 const loginForm = document.getElementById("loginForm");
@@ -29,9 +23,9 @@ window.onload = () => {
 };
 
 // ================================
-// FORM SUBMISSION HANDLER
+// FORM SUBMIT
 // ================================
-loginForm.addEventListener("submit", function (e) {
+loginForm.addEventListener("submit", async function (e) {
     e.preventDefault();
 
     // Reset errors
@@ -42,52 +36,51 @@ loginForm.addEventListener("submit", function (e) {
     const username = usernameInput.value.trim();
     const password = passwordInput.value;
 
-    let hasError = false;
-
-    // Username validation
     if (username === "") {
         usernameError.classList.add("show");
-        hasError = true;
+        return;
     }
 
-    // Password validation
     if (password.length < 4) {
         passwordError.classList.add("show");
-        hasError = true;
+        return;
     }
 
-    if (hasError) return;
-
-    // Loading state
     loginBtn.textContent = "Signing In...";
     loginBtn.disabled = true;
 
-    // Fake backend delay
-    setTimeout(() => {
+    try {
+        const response = await fetch("http://localhost:5000/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ username, password })
+        });
 
-        if (username === VALID_USER && password === VALID_PASS) {
-
-            // Store login session
-            localStorage.setItem("isLoggedIn", "true");
-            localStorage.setItem("username", username);
-
-            // Remember user
-            if (rememberMe.checked) {
-                localStorage.setItem("rememberUser", username);
-            } else {
-                localStorage.removeItem("rememberUser");
-            }
-
-            // Redirect to home page
-            window.location.href = "home.html";
-
-        } else {
-            loginError.classList.add("show");
-            loginBtn.textContent = "Sign In";
-            loginBtn.disabled = false;
+        if (!response.ok) {
+            throw new Error("Invalid credentials");
         }
 
-    }, 1200);
+        const data = await response.json();
+
+        // LOGIN SUCCESS
+        localStorage.setItem("isLoggedIn", "true");
+        localStorage.setItem("username", data.username);
+
+        if (rememberMe.checked) {
+            localStorage.setItem("rememberUser", username);
+        } else {
+            localStorage.removeItem("rememberUser");
+        }
+
+        window.location.href = "home.html";
+
+    } catch (err) {
+        loginError.classList.add("show");
+        loginBtn.textContent = "Sign In";
+        loginBtn.disabled = false;
+    }
 });
 
 // ================================
