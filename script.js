@@ -1,4 +1,10 @@
 // ================================
+// VALID USER CREDENTIALS (Demo)
+// ================================
+const VALID_USER = "RKGIT";
+const VALID_PASS = "RKGIT123@";
+
+// ================================
 // DOM ELEMENTS
 // ================================
 const loginForm = document.getElementById("loginForm");
@@ -23,12 +29,11 @@ window.onload = () => {
 };
 
 // ================================
-// FORM SUBMIT
+// FORM SUBMISSION HANDLER
 // ================================
-loginForm.addEventListener("submit", async function (e) {
+loginForm.addEventListener("submit", function (e) {
     e.preventDefault();
 
-    // Reset errors
     usernameError.classList.remove("show");
     passwordError.classList.remove("show");
     loginError.classList.remove("show");
@@ -36,51 +41,41 @@ loginForm.addEventListener("submit", async function (e) {
     const username = usernameInput.value.trim();
     const password = passwordInput.value;
 
+    let hasError = false;
+
     if (username === "") {
         usernameError.classList.add("show");
-        return;
+        hasError = true;
     }
 
     if (password.length < 4) {
         passwordError.classList.add("show");
-        return;
+        hasError = true;
     }
+
+    if (hasError) return;
 
     loginBtn.textContent = "Signing In...";
     loginBtn.disabled = true;
 
-    try {
-        const response = await fetch("http://localhost:5000/login", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({ username, password })
-        });
+    setTimeout(() => {
+        if (username === VALID_USER && password === VALID_PASS) {
+            localStorage.setItem("isLoggedIn", "true");
+            localStorage.setItem("username", username);
 
-        if (!response.ok) {
-            throw new Error("Invalid credentials");
-        }
+            if (rememberMe.checked) {
+                localStorage.setItem("rememberUser", username);
+            } else {
+                localStorage.removeItem("rememberUser");
+            }
 
-        const data = await response.json();
-
-        // LOGIN SUCCESS
-        localStorage.setItem("isLoggedIn", "true");
-        localStorage.setItem("username", data.username);
-
-        if (rememberMe.checked) {
-            localStorage.setItem("rememberUser", username);
+            window.location.href = "home.html";
         } else {
-            localStorage.removeItem("rememberUser");
+            loginError.classList.add("show");
+            loginBtn.textContent = "Sign In";
+            loginBtn.disabled = false;
         }
-
-        window.location.href = "home.html";
-
-    } catch (err) {
-        loginError.classList.add("show");
-        loginBtn.textContent = "Sign In";
-        loginBtn.disabled = false;
-    }
+    }, 1200);
 });
 
 // ================================
